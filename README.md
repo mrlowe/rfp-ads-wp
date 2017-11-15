@@ -1,5 +1,5 @@
-# rfp-ads-wp
-WordPress Plugin for [rfp-ads](https://github.com/mrlowe/rfp-ads/)
+# RFP Ads WordPress Plugin 
+A WordPress Plugin wrapping [rfp-ads](https://github.com/mrlowe/rfp-ads/)
 
 This plugin allows you to easily modify your WordPress site to display an advertisement for zero-percent financing with First Financial Bank. To install the plugin:
 

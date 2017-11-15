@@ -16,6 +16,7 @@ function activate(){
     add_option('rfp_ads_show_everywhere', false);
     add_option('rfp_ads_custom_term', false);
     add_option('rfp_ads_custom_days', 0);
+    add_option('rfp_ads_custom_destination', '');
 }
 
 /* Options Menu */
@@ -28,10 +29,13 @@ function plugin_admin_init() {
     add_settings_field('rfp-options-show-everywhere', 'Show on Every Page', 'render_show_everywhere', 'rfp-options-section', 'rfp-options-block');
 
     register_setting( 'rfp-options-group', 'rfp_ads_custom_term', 'boolean' );
-    add_settings_field('rfp-options-custom_term', '24-Month Term', 'render_custom_term', 'rfp-options-section', 'rfp-options-block');
+    add_settings_field('rfp-options-custom-term', '24-Month Term', 'render_custom_term', 'rfp-options-section', 'rfp-options-block');
 
     register_setting( 'rfp-options-group', 'rfp_ads_custom_days', 'integer' );
-    add_settings_field('rfp-options-custom_days', 'Show Again After # Days', 'render_custom_days', 'rfp-options-section', 'rfp-options-block');
+    add_settings_field('rfp-options-custom-days', 'Show Again After # Days', 'render_custom_days', 'rfp-options-section', 'rfp-options-block');
+
+    register_setting( 'rfp-options-group', 'rfp_ads_custom_destination', 'string' );
+    add_settings_field('rfp-options-custom-destination', 'Destination URL', 'render_custom_destination', 'rfp-options-section', 'rfp-options-block');
 }
 
 add_action( 'admin_menu', 'load_plugin_menu' );
@@ -81,6 +85,11 @@ function render_custom_days() {
     echo "<input name='rfp_ads_custom_days' type='number' min='0' max='365' value='{$option}' />";
 }
 
+function render_custom_destination() {
+    $option = get_option('rfp_ads_custom_destination');
+    echo "<input name='rfp_ads_custom_destination' type='text' size='32' value='{$option}' />";
+}
+
 
 /* Script Insertion */
 
@@ -96,13 +105,15 @@ add_action( 'wp_head', 'render_defaults');
 function render_defaults() {
     $custom_term = get_option('rfp_ads_custom_term') ? 24 : 12;
     $custom_days = get_option('rfp_ads_custom_days');
+    $custom_destination = get_option('rfp_ads_custom_destination');
     if (!$use_defaults) {
     ?>
     <script>
         jQuery(document).ready( function() {
             jQuery(document).rfpAdvertisements({
                 term: <?php echo $custom_term ?>,
-                hideDays: <?php echo $custom_days ?>
+                hideDays: <?php echo $custom_days ?>,
+                destination: <?php echo "'{$custom_destination}'" ?>
             });
         });
     </script>

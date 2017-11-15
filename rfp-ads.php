@@ -3,7 +3,7 @@
    Plugin Name: RFP Ads
    Plugin URI: https://github.com/mrlowe/rfp-ads-wp
    Description: Funding ad generator for First Financial RFP
-   Version: 0.1
+   Version: 0.2.1
    Author: Literate Programmer, LLC
    Author URI: http://literateprogrammer.com
    License: GPL2
@@ -106,7 +106,6 @@ function render_defaults() {
     $custom_term = get_option('rfp_ads_custom_term') ? 24 : 12;
     $custom_days = get_option('rfp_ads_custom_days');
     $custom_destination = get_option('rfp_ads_custom_destination');
-    if (!$use_defaults) {
     ?>
     <script>
         jQuery(document).ready( function() {
@@ -118,7 +117,6 @@ function render_defaults() {
         });
     </script>
     <?php
-    }
 }
 
 ?>
